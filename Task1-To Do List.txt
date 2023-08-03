@@ -1,0 +1,60 @@
+# Define an empty list to store tasks
+tasks = []
+
+def show_menu():
+    print("===== To-Do List Application =====")
+    print("1. Add Task")
+    print("2. View Tasks")
+    print("3. Mark Task as Completed")
+    print("4. Remove Task")
+    print("5. Exit")
+
+def add_task():
+    task = input("Enter the task: ")
+    tasks.append({"task": task, "completed": False})
+    print("Task added successfully!")
+
+def view_tasks():
+    if not tasks:
+        print("No tasks found.")
+    else:
+        for index, task in enumerate(tasks, start=1):
+            status = "Completed" if task["completed"] else "Not Completed"
+            print(f"{index}. {task['task']} - {status}")
+
+def mark_completed():
+    view_tasks()
+    task_number = int(input("Enter the task number to mark as completed: ")) - 1
+    if 0 <= task_number < len(tasks):
+        tasks[task_number]["completed"] = True
+        print("Task marked as completed.")
+    else:
+        print("Invalid task number.")
+
+def remove_task():
+    view_tasks()
+    task_number = int(input("Enter the task number to remove: ")) - 1
+    if 0 <= task_number < len(tasks):
+        tasks.pop(task_number)
+        print("Task removed.")
+    else:
+        print("Invalid task number.")
+
+# Main application loop
+while True:
+    show_menu()
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_task()
+    elif choice == "2":
+        view_tasks()
+    elif choice == "3":
+        mark_completed()
+    elif choice == "4":
+        remove_task()
+    elif choice == "5":
+        print("Exiting the application.")
+        break
+    else:
+        print("Invalid choice. Please try again.")
